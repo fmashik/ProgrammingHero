@@ -1,3 +1,4 @@
+Problem-1
 import * as readline from "readline";
 
 function filterEvenNumbers(numbers: number[]): number[] {
@@ -34,3 +35,169 @@ rl.question("Enter numbers separated by comma: ", (input) => {
 
     rl.close();
 });
+
+Problem-2
+import * as readline from "readline";
+
+function reverseString(text: string): string {
+    return text.split("").reverse().join("");
+}
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+rl.question("Enter a string: ", (input) => {
+
+    if (!input || input.trim() === "") {
+        console.log("Invalid input! Please enter a valid string.");
+        rl.close();
+        return;
+    }
+
+    const result = reverseString(input);
+
+    console.log("Reversed String:", result);
+
+    rl.close();
+});
+
+problem 3:
+import * as readline from "readline";
+
+type StringOrNumber = string | number;
+
+function checkType(value: StringOrNumber): string {
+
+    if (typeof value === "string") {
+        return "String";
+    }
+
+    if (typeof value === "number") {
+        return "Number";
+    }
+
+    return "Unknown";
+}
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+rl.question("Enter a value: ", (input) => {
+
+    // Try converting to number
+    const numberValue = Number(input);
+
+    let value: StringOrNumber;
+
+    // Check if it's a valid number or string
+    if (!isNaN(numberValue) && input.trim() !== "") {
+        value = numberValue;
+    } else {
+        value = input;
+    }
+
+    console.log("Type is:", checkType(value));
+
+    rl.close();
+});
+
+Problem 4:
+function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+    return obj[key];
+}
+
+// Example object
+const student = {
+    name: "Ashik",
+    age: 25,
+    isPassed: true
+};
+
+// Using getProperty function
+const name = getProperty(student, "name");
+const age = getProperty(student, "age");
+const status = getProperty(student, "isPassed");
+
+console.log("Name:", name);
+console.log("Age:", age);
+console.log("Passed:", status);
+
+problem 5:
+
+// Interface definition
+interface Book {
+    title: string;
+    author: string;
+    publishedYear: number;
+    isRead?: boolean; // optional property
+}
+
+// Function to toggle read status
+function toggleReadStatus(book: Book): Book {
+
+    return {
+        ...book,
+        isRead: true
+    };
+}
+
+// Example usage
+const myBook: Book = {
+    title: "Clean Code",
+    author: "Robert C. Martin",
+    publishedYear: 2008
+};
+
+const updatedBook = toggleReadStatus(myBook);
+
+console.log(updatedBook);
+
+Problem 6:
+// Parent class
+class Person {
+  name: string;
+  age: number;
+
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
+}
+
+// Child class
+class Student extends Person {
+  grade: string;
+
+  constructor(name: string, age: number, grade: string) {
+    super(name, age); // call parent constructor
+    this.grade = grade;
+  }
+
+  // Method to return student details
+  getDetails(): string {
+    return `Name: ${this.name}, Age: ${this.age}, Grade: ${this.grade}`;
+  }
+}
+
+// Create object
+const student1 = new Student("Ashik", 24, "A");
+
+// Call method
+console.log(student1.getDetails());
+
+Problem 7:
+function getIntersection(arr1: number[], arr2: number[]): number[] {
+  return arr1.filter((num) => arr2.includes(num));
+}
+
+// Example usage
+const array1 = [1, 2, 3, 4, 5,45];
+const array2 = [3, 4, 5, 6, 7,45];
+
+const result = getIntersection(array1, array2);
+
+console.log(result);
