@@ -1,0 +1,36 @@
+import * as readline from "readline";
+
+function filterEvenNumbers(numbers: number[]): number[] {
+
+    return numbers.filter(num => num % 2 === 0);
+}
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+rl.question("Enter numbers separated by comma: ", (input) => {
+
+    const inputArray = input.split(",");
+
+    // Validate input
+    const isValid = inputArray.every(item => !isNaN(Number(item.trim())));
+
+    if (!isValid) {
+
+        console.log("Invalid input! Please enter numbers only.");
+
+        rl.close();
+        return;
+    }
+
+    // Convert to number array
+    const numbers = inputArray.map(item => Number(item.trim()));
+
+    const evenNumbers = filterEvenNumbers(numbers);
+
+    console.log("Even Numbers:", evenNumbers);
+
+    rl.close();
+});
